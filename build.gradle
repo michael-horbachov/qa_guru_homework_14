@@ -1,0 +1,33 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.7.2',
+            'com.codeborne:selenide:5.22.3',
+            'org.aeonbits.owner:owner:1.0.12',
+            'org.assertj:assertj-core:3.20.2'
+    )
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
+
+task web_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "web"
+    }
+}
+task api_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "api"
+    }
+}
